@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .forms import CreateUserForm, LoginForm, UpdateUserForm
+from .forms import CreateUserForm, LoginForm, UpdateUserForm, UpdateProfileForm
 from .models import Profile
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login
@@ -59,22 +59,34 @@ def user_logout(request):
 
 @login_required(login_url="my-login")
 def dashboard(request):
-    return render(request, "ecomponents/dashboard.html")
+    profile_pic = Profile.objects.get(user=request.user)
+    context = {"profilePic": profile_pic}
+    return render(request, "ecomponents/dashboard.html", context=context)
 
 
 @login_required(login_url="my-login")
 def profile_management(request):
     user_form = UpdateUserForm(instance=request.user)
 
+    profile = Profile.objects.get(user=request.user)
+
+    profile_form = UpdateProfileForm(instance=profile)
+
     if request.method == "POST":
         user_form = UpdateUserForm(request.POST, instance=request.user)
+
+        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=profile)
 
         if user_form.is_valid():
             user_form.save()
 
             return redirect("dashboard")
 
-    context = {"user_form": user_form}
+        if profile_form.is_valid():
+            profile_form.save()
+            return redirect("dashboard")
+
+    context = {"user_form": user_form, "profile_form": profile_form}
 
     return render(request, "ecomponents/profile-management.html", context=context)
 

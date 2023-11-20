@@ -16,7 +16,17 @@
 
     <h1> Dashboard </h1>
 
+    <br>
+
+    Welcome, {{user}}
+
+    <br>
+
     <hr>
+
+    <img style="width: 100px;" src="{{profilePic.profile_pic.url}}" alt=""/>
+
+    <br> <br>
 
     <a href="{% url 'user-logout' %}"> Logout </a>
 

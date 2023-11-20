@@ -10,3 +10,8 @@
 
 UN: admin
 PW: 12345678DND
+
+## User
+
+UN: LilaTorio
+PW: password!!!

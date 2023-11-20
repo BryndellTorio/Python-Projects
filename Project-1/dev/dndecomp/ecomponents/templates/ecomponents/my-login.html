@@ -1,17 +1,45 @@
 {% load static %}
 
+{% load crispy_forms_tags %}
+
 <html>
 
-    <head>
-        <title> my-login | Design and Development e-Components</title>
+  <head>
+    <title> my-login | Design and Development e-Components</title>
 
-        <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/morph/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/morph/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/>
 
-    </head>
+  </head>
+
+  <br>
+
+  <div class="container bg-white shadow p-5 form-layout">
 
     <h1> My-login </h1>
 
-    <script src="{% static 'js/app.js' %}"> </script>
+    <br>
+
+    <form method="POST" autocomplete="off">
+
+      {% csrf_token %}
+
+      {{form.username|as_crispy_field}}
+
+      <br>
+
+      {{form.password|as_crispy_field}}
+
+      <br>
+
+      <input class="btn btn-primary" type="submit" value="Submit"/>
+
+      <br>
+
+    </form>
+
+  </div>
+
+  <script src="{% static 'js/app.js' %}"> </script>
 
 </html>

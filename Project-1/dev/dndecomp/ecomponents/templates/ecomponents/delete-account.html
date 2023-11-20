@@ -1,0 +1,41 @@
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+<html>
+
+  <head>
+    <title> Delete account | Design and Development e-Components</title>
+
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/morph/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+
+  </head>
+
+  <br>
+
+  <div class="container bg-white shadow-md p-5 form-layout">
+
+    <form method="POST" autocomplete="off">
+
+      {% csrf_token %}
+
+      <p>Are you sure you want to delete your account?</p>
+
+      <br>
+
+      <a href="{% url "profile-management" %}"> Go Back </a>
+
+      <br> <br>
+
+      <input class="btn btn-primary" type="submit" value="Submit">
+
+    </form>
+
+  </div>
+
+  <br>
+
+  <script src="{% static 'js/app.js' %}"> </script>
+
+</html>
